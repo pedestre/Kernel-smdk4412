@@ -1,0 +1,7 @@
+--- GT-I9100_Update4-Kernel/arch/arm/mach-exynos/stand-hotplug.c	2012-03-16 06:12:44.000000000 +0100
++++ arch/arm/mach-exynos/stand-hotplug.c	2012-04-24 17:54:13.200774153 +0200
+@@ -53,2 +53,2 @@
+-#define TRANS_LOAD_H0 85
+-#define TRANS_LOAD_L1 40
++#define TRANS_LOAD_H0 30
++#define TRANS_LOAD_L1 20

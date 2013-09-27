@@ -1,0 +1,14 @@
+--- GT-I9100_Update4-Kernel/drivers/media/video/samsung/mali/platform/orion-m400/mali_platform.c	2012-03-16 06:12:45.000000000 +0100
++++ drivers/media/video/samsung/mali/platform/orion-m400/mali_platform.c	2012-04-24 18:39:22.673369550 +0200
+@@ -63,9 +63,9 @@
+ int mali_gpu_clk 	=		160;
+ static unsigned int GPU_MHZ	=		1000000;
+ #ifdef CONFIG_S5PV310_ASV
+-int mali_gpu_vol     =               1050000;        /* 1.10V for ASV */
++int mali_gpu_vol     =               1100000;        /* 1.10V for ASV */
+ #else
+-int mali_gpu_vol     =               1050000;        /* 1.10V */
++int mali_gpu_vol     =               1100000;        /* 1.10V */
+ #endif
+ 
+ #if MALI_DVFS_ENABLED
