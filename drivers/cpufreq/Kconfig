@@ -300,6 +300,9 @@ config CPU_FREQ_GOV_SLEEPY
 config CPU_FREQ_GOV_HYPER
 	tristate "'hyper' cpufreq policy governor"
 
+config CPU_FREQ_GOV_NEOX
+	tristate "'neox' cpufreq policy governor"
+
 config CPU_FREQ_DEFAULT_GOV_INTELLIDEMAND
 bool "intellidemand"
 select CPU_FREQ_GOV_INTELLIDEMAND
