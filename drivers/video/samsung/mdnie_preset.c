@@ -151,8 +151,8 @@ static ssize_t mdnie_preset_store(struct device *dev, struct device_attribute *a
 			update_mdnie_array("tune_natural_ui", tune_natural_ui_sm);
 			update_mdnie_array("tune_natural_video", tune_natural_video_sm);
 			update_mdnie_array("tune_natural_vt", tune_natural_vt_sm);
-			update_mdnie_array("tune_camera", tune_camera_sm);
-			update_mdnie_array("tune_camera_outdoor", tune_camera_outdoor_sm);
+			update_mdnie_array("tune_camera", tune_camera_hr ); //tune_camera_sm
+			update_mdnie_array("tune_camera_outdoor", tune_camera_outdoor_hr); //tune_camera_outdoor_sm
 			update_mdnie_array("tune_cold", tune_cold_sm);
 			update_mdnie_array("tune_cold_outdoor", tune_cold_outdoor_sm);
 			update_mdnie_array("tune_normal_outdoor", tune_normal_outdoor_sm);
@@ -271,4 +271,6 @@ static void mdnie_preset_exit(void)
 
 module_init(mdnie_preset_init);
 module_exit(mdnie_preset_exit);
+
+
 
