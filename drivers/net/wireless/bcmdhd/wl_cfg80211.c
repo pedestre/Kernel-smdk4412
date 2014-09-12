@@ -273,13 +273,13 @@ static s32 wl_cfg80211_get_key(struct wiphy *wiphy, struct net_device *dev,
 static s32 wl_cfg80211_config_default_mgmt_key(struct wiphy *wiphy,
 	struct net_device *dev,	u8 key_idx);
 static s32 wl_cfg80211_resume(struct wiphy *wiphy);
-#if defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
+#if 1 //defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
 	2, 0))
 static s32 wl_cfg80211_mgmt_tx_cancel_wait(struct wiphy *wiphy,
 	struct net_device *dev, u64 cookie);
 static s32 wl_cfg80211_del_station(struct wiphy *wiphy,
 	struct net_device *ndev, u8* mac_addr);
-#endif (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 2, 0))
+#endif /* (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 2, 0)) */
 #if LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 39)
 static s32 wl_cfg80211_suspend(struct wiphy *wiphy, struct cfg80211_wowlan *wow);
 #else
@@ -914,7 +914,7 @@ static void swap_key_to_BE(struct wl_wsec_key *key)
 	key->iv_initialized = dtoh32(key->iv_initialized);
 }
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)
+#if 0 //LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)
 /* For debug: Dump the contents of the encoded wps ie buffe */
 static void
 wl_validate_wps_ie(char *wps_ie, s32 wps_ie_len, bool *pbc)
@@ -5761,7 +5761,7 @@ wl_cfg80211_bcn_validate_sec(
 
 }
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
 static s32 wl_cfg80211_bcn_set_params(
 	struct cfg80211_ap_settings *info,
 	struct net_device *dev,
@@ -5813,7 +5813,7 @@ static s32 wl_cfg80211_bcn_set_params(
 
 	return err;
 }
-#endif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) */
 
 static s32
 wl_cfg80211_parse_ies(u8 *ptr, u32 len, struct parsed_ies *ies)
@@ -5949,7 +5949,7 @@ exit:
 	return err;
 }
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
 s32
 wl_cfg80211_parse_ap_ies(
 	struct net_device *dev,
@@ -6039,7 +6039,7 @@ wl_cfg80211_set_ies(
 
 	return err;
 }
-#endif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) */
 
 static s32 wl_cfg80211_hostapd_sec(
 	struct net_device *dev,
@@ -6109,7 +6109,7 @@ static s32 wl_cfg80211_hostapd_sec(
 	return 0;
 }
 
-#if defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
+#if 1 //defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
 	2, 0))
 static s32
 wl_cfg80211_del_station(
@@ -6127,7 +6127,7 @@ wl_cfg80211_del_station(
 		sizeof(struct ether_addr) + sizeof(uint)] = {0};
 	struct maclist *assoc_maclist = (struct maclist *)mac_buf;
 	int num_associated = 0;
-#endif CUSTOMER_HW4
+#endif /* CUSTOMER_HW4 */
 
 	WL_DBG(("Entry\n"));
 	if (mac_addr == NULL) {
@@ -6178,7 +6178,7 @@ wl_cfg80211_del_station(
 }
 #endif /* WL_SUPPORT_BACKPORTED_KPATCHES || KERNEL_VER >= KERNEL_VERSION(3, 2, 0)) */
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
 static s32
 wl_cfg80211_start_ap(
 	struct wiphy *wiphy,
@@ -6370,7 +6370,7 @@ wl_cfg80211_change_beacon(
 fail:
 	return err;
 }
-#else LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0) 
+#else /* LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0) */
 static s32
 wl_cfg80211_add_set_beacon(struct wiphy *wiphy, struct net_device *dev,
 	struct beacon_parameters *info)
@@ -6622,7 +6622,7 @@ static struct cfg80211_ops wl_cfg80211_ops = {
 	.mgmt_frame_register = wl_cfg80211_mgmt_frame_register,
 	.change_bss = wl_cfg80211_change_bss,
 	.set_channel = wl_cfg80211_set_channel,
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)
+#if 0 //LINUX_VERSION_CODE < KERNEL_VERSION(3, 4, 0)
 	.set_beacon = wl_cfg80211_add_set_beacon,
 	.add_beacon = wl_cfg80211_add_set_beacon,
 #else
@@ -6634,14 +6634,14 @@ static struct cfg80211_ops wl_cfg80211_ops = {
 	.sched_scan_start = wl_cfg80211_sched_scan_start,
 	.sched_scan_stop = wl_cfg80211_sched_scan_stop,
 #endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 2, 0) */
-#if defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
+#if 1 //defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
 	2, 0))
 	.del_station = wl_cfg80211_del_station,
 	.mgmt_tx_cancel_wait = wl_cfg80211_mgmt_tx_cancel_wait,
-#endif WL_SUPPORT_BACKPORTED_KPATCHES || KERNEL_VERSION >= (3,2,0) 
-#if LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0)
+#endif /* WL_SUPPORT_BACKPORTED_KPATCHES || KERNEL_VERSION >= (3,2,0) */
+#if 1 //LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0)
 	.tdls_oper = wl_cfg80211_tdls_oper
-#endif LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0) 
+#endif /* LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0) */
 };
 
 s32 wl_mode_to_nl80211_iftype(s32 mode)
@@ -6718,20 +6718,20 @@ static s32 wl_setup_wiphy(struct wireless_dev *wdev, struct device *sdiofunc_dev
 	 * to let Supplicant to provide channel info and FW letter may roam
 	 * if needed so DON'T advertise that featur eto Supplicant.
 	 */
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 2, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 2, 0)
 /*	wdev->wiphy->flags |= WIPHY_FLAG_SUPPORTS_FW_ROAM; */
 #endif
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 3, 0)
 	wdev->wiphy->flags |= WIPHY_FLAG_HAS_REMAIN_ON_CHANNEL |
 		WIPHY_FLAG_OFFCHAN_TX;
 #endif
-#if defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
+#if 1 //defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
 	4, 0))
 		/* From 3.4 kernel ownards AP_SME flag can be advertised
 		  * to remove the patch from supplicant
 		  */
 		wdev->wiphy->flags |= WIPHY_FLAG_HAVE_AP_SME;
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0))
+#if 1 //(LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0))
 		/* Supplicant distinguish between the SoftAP mode and other
 		 * modes (e.g. P2P, WPS, HS2.0) when it builds the probe
 		 * response frame from Supplicant MR1 and Kernel 3.4.0 or
@@ -6743,9 +6743,9 @@ static s32 wl_setup_wiphy(struct wireless_dev *wdev, struct device *sdiofunc_dev
 			wdev->wiphy->flags |= WIPHY_FLAG_AP_PROBE_RESP_OFFLOAD;
 			wdev->wiphy->probe_resp_offload = 0;
 		}
-#endif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) 
-#endif WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)) 
-#if LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0)
+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) */
+#endif /* WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)) */
+#if 1 //LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0)
 		wdev->wiphy->flags |= WIPHY_FLAG_SUPPORTS_TDLS;
 #endif
 	WL_DBG(("Registering custom regulatory)\n"));
@@ -7022,7 +7022,7 @@ wl_notify_connect_status_ap(struct wl_priv *wl, struct net_device *ndev,
 	u32 reason = ntoh32(e->reason);
 	u32 len = ntoh32(e->datalen);
 
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0)) && !defined(WL_CFG80211_STA_EVENT)
+#if 0 //(LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0)) && !defined(WL_CFG80211_STA_EVENT)
 	bool isfree = false;
 	u8 *mgmt_frame;
 	u8 bsscfgidx = e->bsscfgidx;
@@ -7050,7 +7050,7 @@ wl_notify_connect_status_ap(struct wl_priv *wl, struct net_device *ndev,
 		return 0;
 	}
 
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0)) && !defined(WL_CFG80211_STA_EVENT)
+#if 0 //(LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0)) && !defined(WL_CFG80211_STA_EVENT)
 	WL_DBG(("Enter \n"));
 	if (!len && (event == WLC_E_DEAUTH)) {
 		len = 2; /* reason code field */
@@ -7127,23 +7127,23 @@ wl_notify_connect_status_ap(struct wl_priv *wl, struct net_device *ndev,
 	isfree = true;
 
 	if (event == WLC_E_ASSOC_IND && reason == DOT11_SC_SUCCESS) {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
 		cfg80211_rx_mgmt(ndev, freq, 0, mgmt_frame, len, GFP_ATOMIC);
 #else
 		cfg80211_rx_mgmt(ndev, freq, mgmt_frame, len, GFP_ATOMIC);
-#endif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) 
+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) */
 	} else if (event == WLC_E_DISASSOC_IND) {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
 		cfg80211_rx_mgmt(ndev, freq, 0, mgmt_frame, len, GFP_ATOMIC);
 #else
 		cfg80211_rx_mgmt(ndev, freq, mgmt_frame, len, GFP_ATOMIC);
-#endif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) */
 	} else if ((event == WLC_E_DEAUTH_IND) || (event == WLC_E_DEAUTH)) {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
 		cfg80211_rx_mgmt(ndev, freq, 0, mgmt_frame, len, GFP_ATOMIC);
 #else
 		cfg80211_rx_mgmt(ndev, freq, mgmt_frame, len, GFP_ATOMIC);
-#endif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) 
+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) */
 	}
 
 exit:
@@ -7152,7 +7152,7 @@ exit:
 	if (body)
 		kfree(body);
 	return err;
-#else LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0) && !WL_CFG80211_STA_EVENT 
+#else /* LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0) && !WL_CFG80211_STA_EVENT */
 	sinfo.filled = 0;
 	if (((event == WLC_E_ASSOC_IND) || (event == WLC_E_REASSOC_IND)) &&
 		reason == DOT11_SC_SUCCESS) {
@@ -8216,11 +8216,11 @@ wl_notify_rx_mgmt_frame(struct wl_priv *wl, struct net_device *ndev,
 		}
 	}
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
+#if 1 //LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0)
 	cfg80211_rx_mgmt(ndev, freq, 0, mgmt_frame, mgmt_frame_len, GFP_ATOMIC);
 #else
 	cfg80211_rx_mgmt(ndev, freq, mgmt_frame, mgmt_frame_len, GFP_ATOMIC);
-#endif LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) 
+#endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3, 4, 0) */
 
 	WL_DBG(("mgmt_frame_len (%d) , e->datalen (%d), channel (%d), freq (%d)\n",
 		mgmt_frame_len, ntoh32(e->datalen), channel, freq));
@@ -10756,7 +10756,7 @@ wl_tdls_event_handler(struct wl_priv *wl, struct net_device *ndev,
 	return 0;
 
 }
-#if LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0)
+#if 1 //LINUX_VERSION_CODE > KERNEL_VERSION(3, 2, 0)
 static s32
 wl_cfg80211_tdls_oper(struct wiphy *wiphy, struct net_device *dev,
 	u8 *peer, enum nl80211_tdls_operation oper)
@@ -11073,7 +11073,7 @@ void wl_cfg80211_enable_trace(bool set, u32 level)
 	else
 		wl_dbg_level |= (WL_DBG_LEVEL & level);
 }
-#if defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
+#if 1 //defined(WL_SUPPORT_BACKPORTED_KPATCHES) || (LINUX_VERSION_CODE >= KERNEL_VERSION(3, \
 	2, 0))
 static s32
 wl_cfg80211_mgmt_tx_cancel_wait(struct wiphy *wiphy,
@@ -11087,7 +11087,7 @@ wl_cfg80211_mgmt_tx_cancel_wait(struct wiphy *wiphy,
 
 	return 0;
 }
-#endif WL_SUPPORT_BACKPORTED_PATCHES || KERNEL >= 3.2.0
+#endif /* WL_SUPPORT_BACKPORTED_PATCHES || KERNEL >= 3.2.0 */
 
 #ifdef WL11U
 bcm_tlv_t *
