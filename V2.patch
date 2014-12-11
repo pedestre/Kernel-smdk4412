@@ -1,52 +1,3 @@
-diff -rupN GT-I9100_Update4-Kernel/drivers/media/video/samsung/mali/platform/orion-m400/mali_platform_dvfs.c MyKernel/drivers/media/video/samsung/mali/platform/orion-m400/mali_platform_dvfs.c
---- GT-I9100_Update4-Kernel/drivers/media/video/samsung/mali/platform/orion-m400/mali_platform_dvfs.c	2012-03-16 06:12:45.000000000 +0100
-+++ MyKernel/drivers/media/video/samsung/mali/platform/orion-m400/mali_platform_dvfs.c	2012-04-02 11:35:17.794588000 +0200
-@@ -79,3 +79,3 @@
--			/*step 0*/{100  ,1000000    , 950000},
--			/*step 1*/{160  ,1000000    , 950000},
--			/*step 2*/{267  ,1000000    ,1000000} };
-+			/*step 0*/{100  ,1000000    , 900000},
-+			/*step 1*/{160  ,1000000    , 900000},
-+			/*step 2*/{267  ,1000000    , 950000} };
-@@ -88,19 +88,19 @@ #define ASV_LEVEL_SUPPORT 0
--static unsigned int asv_3d_volt_5_table[ASV_5_LEVEL][MALI_DVFS_STEPS] = {
--	/* L3 (100/134MHz) L2(160MHz), L1(267MHz) */
--	{1000000, 1000000, 1100000},	/* S */
--	{1000000, 1000000, 1100000},	/* A */
--	{ 950000,  950000, 1000000},	/* B */
--	{ 950000,  950000, 1000000},	/* C */
--	{ 950000,  950000,  950000},	/* D */
--};
--
--static unsigned int asv_3d_volt_8_table[ASV_8_LEVEL][MALI_DVFS_STEPS] = {
--	/* L3 (100/134MHz) L2(160MHz), L1(267MHz) */
--	{1000000, 1000000, 1100000},	/* SS */
--	{1000000, 1000000, 1100000},	/* A1 */
--	{1000000, 1000000, 1100000},	/* A2 */
--	{ 950000,  950000, 1000000},	/* B1 */
--	{ 950000,  950000, 1000000},	/* B2 */
--	{ 950000,  950000, 1000000},	/* C1 */
--	{ 950000,  950000, 1000000},	/* C2 */
--	{ 950000,  950000,  950000},	/* D1 */
-+static unsigned int asv_3d_volt_5_table[ASV_5_LEVEL][MALI_DVFS_STEPS] = {
-+	/* L3 (100/134MHz) L2(160MHz), L1(267MHz) */
-+	{1000000, 1000000, 1100000},	/* S */
-+	{1000000, 1000000, 1100000},	/* A */
-+	{ 950000,  950000,  950000},	/* B */
-+	{ 950000,  950000,  950000},	/* C */
-+	{ 950000,  950000,  950000},	/* D */
-+};
-+
-+static unsigned int asv_3d_volt_8_table[ASV_8_LEVEL][MALI_DVFS_STEPS] = {
-+	/* L3 (100/134MHz) L2(160MHz), L1(267MHz) */
-+	{1000000, 1000000, 1100000},	/* SS */
-+	{1000000, 1000000, 1100000},	/* A1 */
-+	{1000000, 1000000, 1100000},	/* A2 */
-+	{ 950000,  950000,  950000},	/* B1 */
-+	{ 950000,  950000,  950000},	/* B2 */
-+	{ 950000,  950000,  950000},	/* C1 */
-+	{ 950000,  950000,  950000},	/* C2 */
-+	{ 950000,  950000,  950000},	/* D1 */
 diff -rupN GT-I9100_Update4-Kernel/arch/arm/mach-exynos/busfreq.c MyKernel/arch/arm/mach-exynos/busfreq.c
 --- GT-I9100_Update4-Kernel/arch/arm/mach-exynos/busfreq.c	2012-03-16 06:12:44.000000000 +0100
 +++ MyKernel/arch/arm/mach-exynos/busfreq.c	2012-04-02 11:07:50.746573000 +0200
@@ -122,27 +73,6 @@ diff -rupN GT-I9100_Update4-Kernel/arch/arm/mach-exynos/cpufreq-4210.c MyKernel/
  			.mode	= REGULATOR_MODE_NORMAL,
  			.enabled = 1,
  		},
---- ../GT-I9100_Update4-Kernel/drivers/media/video/samsung/mali/platform/orion-m400/mali_platform.c	2012-03-16 06:12:45.000000000 +0100
-+++ ./drivers/media/video/samsung/mali/platform/orion-m400/mali_platform.c	2012-04-24 18:39:22.673369550 +0200
-@@ -63,9 +63,9 @@
- int mali_gpu_clk 	=		160;
- static unsigned int GPU_MHZ	=		1000000;
- #ifdef CONFIG_S5PV310_ASV
--int mali_gpu_vol     =               1100000;        /* 1.10V for ASV */
-+int mali_gpu_vol     =               1050000;        /* 1.10V for ASV */
- #else
--int mali_gpu_vol     =               1100000;        /* 1.10V */
-+int mali_gpu_vol     =               1050000;        /* 1.10V */
- #endif
- 
- #if MALI_DVFS_ENABLED
---- ../GT-I9100_Update4-Kernel/arch/arm/mach-exynos/stand-hotplug.c	2012-03-16 06:12:44.000000000 +0100
-+++ ./arch/arm/mach-exynos/stand-hotplug.c	2012-04-24 17:54:13.200774153 +0200
-@@ -53,2 +53,2 @@
--#define TRANS_LOAD_H0 30
--#define TRANS_LOAD_L1 20
-+#define TRANS_LOAD_H0 85
-+#define TRANS_LOAD_L1 40
 
  
 
